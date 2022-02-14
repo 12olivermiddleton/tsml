@@ -45,6 +45,10 @@ public class week1_examples {
         System.out.println(" Number correct = "+count);
         System.out.println(" Accuracy = "+count/(double)wdbc.numInstances());
 
+        System.out.println("-----------");
+        double accuracy = WekaTools.accuracy(cls, wdbc);
+        System.out.println("accuracy of cls classifier= "+accuracy);
+
     }
 
 
