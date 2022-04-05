@@ -75,9 +75,9 @@ public class WekaTools {
         return split;
     }
 
-    public static double[] classDistribution(Instances data) throws Exception{
-        //TODO implement body for this method
-    }
+//    public static double[] classDistribution(Instances data) throws Exception{
+//        //TODO implement body for this method
+//    }
 
     public static void main(String[] args) throws Exception {
         Instances arsenal = LoadData("C:\\Users\\omidd\\OneDrive\\Documents\\University\\Third Year\\Machine Learning\\tsml\\src\\main\\java\\Lab1\\Arsenal_TEST.arff");
