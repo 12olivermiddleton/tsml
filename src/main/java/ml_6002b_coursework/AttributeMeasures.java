@@ -101,7 +101,11 @@ public class AttributeMeasures {
 //
 //    }
 
-    // main method test harness
+    /**
+     * Main method.
+     *
+     * @param args the options for the attribute measure main
+     */
     public static void main(String[] args) {
         /**
          * Data in form:
