@@ -92,14 +92,52 @@ public class AttributeMeasures {
 
 
 
-//    // Returns the gini measure for a given attributes contingency table
-//    public static double measureGini(int[][] attribute){
-//
-//    }
-//    // Returns chi squared measure for a given attributes contingency table
-//    public static double measureChiSquared(int[][] attribute){
-//
-//    }
+    // Returns the gini measure for a given attributes contingency table
+    public static double measureGini(int[][] attribute){
+        double yes_count = attribute[0][0] + attribute[0][1];
+        double no_count = attribute[1][0] + attribute[1][1];
+        double total_count = yes_count + no_count;
+
+        double prob_yes = yes_count / total_count;
+        double prob_no = no_count / total_count;
+
+        double gini_root_impurity = 1 - (((prob_yes)*(prob_yes))+((prob_no)*(prob_no)));
+
+
+        return gini_root_impurity;
+    }
+
+
+    // Returns chi squared measure for a given attributes contingency table
+    public static double measureChiSquared(int[][] attribute){
+
+        double yes_count = attribute[0][0] + attribute[0][1];
+        double no_count = attribute[1][0] + attribute[1][1];
+
+        double islay_count = attribute[0][0] + attribute[1][0];
+        double speyside_count = attribute[0][1] + attribute[1][1];
+
+        double total_count = islay_count + speyside_count;
+
+        double prob_islay = islay_count / total_count;
+        double prob_speyside = speyside_count / total_count;
+
+        double[][] expected_attribute_values = {
+                {yes_count*prob_islay, yes_count*prob_speyside},
+                {no_count*prob_islay, no_count*prob_speyside}
+        };
+
+
+
+        double chi_squared = (
+                (Math.pow((attribute[0][0] - expected_attribute_values[0][0]), 2)/expected_attribute_values[0][0])
+                + (Math.pow((attribute[0][1] - expected_attribute_values[0][1]), 2)/expected_attribute_values[0][1])
+                + (Math.pow((attribute[1][0] - expected_attribute_values[1][0]), 2)/expected_attribute_values[1][0])
+                + (Math.pow((attribute[1][1] - expected_attribute_values[1][1]), 2)/expected_attribute_values[1][1])
+        );
+        return chi_squared;
+
+    }
 
     /**
      * Main method.
@@ -129,6 +167,12 @@ public class AttributeMeasures {
 
         double ig_ratio = measureInformationGainRatio(peaty);
         System.out.println("Information Gain Ratio: " + ig_ratio);
+
+        double gini_measure = measureGini(peaty);
+        System.out.println("Gini Measure: " + gini_measure);
+
+        double chi_squared = measureChiSquared(peaty);
+        System.out.println("Chi Squared: " + chi_squared);
 
     }
 
