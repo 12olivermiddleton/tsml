@@ -5,23 +5,22 @@ import weka.core.Instance;
 import weka.core.Instances;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 
 
 public class IGAttributeSplitMeasure extends AttributeSplitMeasure {
 
-    public static Instances LoadData(String file_path){
-
-        Instances dataset = null;
-        try{
-            BufferedReader reader = new BufferedReader(new FileReader(file_path));
-            dataset = new Instances(reader);
-            reader.close();
-        }catch(Exception e) {
-            System.out.println("Exception caught: " + e);
-        }
-
-        return dataset;
+    /**
+     * Loads the arff file at the target location and sets the last attribute to be the class value,
+     * or returns null on any error, such as not finding the file or it being malformed
+     *
+     * @param fullPath path to the file to try and load
+     * @return Instances from file.
+     */
+    public static Instances loadData(String fullPath) throws IOException {
+        return loadDataThrowable(new File(fullPath));
     }
 
     @Override
