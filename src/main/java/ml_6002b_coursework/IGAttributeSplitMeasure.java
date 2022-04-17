@@ -23,7 +23,8 @@ public class IGAttributeSplitMeasure extends AttributeSplitMeasure {
 
     @Override
     public double computeAttributeQuality(Instances data, Attribute att) throws Exception {
-        double yes_count
+        double yes_count = data.numClasses();
+        System.out.println(yes_count);
 
 
         return 0;
