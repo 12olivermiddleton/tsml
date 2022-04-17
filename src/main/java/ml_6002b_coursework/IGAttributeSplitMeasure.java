@@ -1,6 +1,7 @@
 package ml_6002b_coursework;
 
 import weka.core.Attribute;
+import weka.core.Instance;
 import weka.core.Instances;
 
 import java.io.FileReader;
@@ -23,8 +24,20 @@ public class IGAttributeSplitMeasure extends AttributeSplitMeasure {
 
     @Override
     public double computeAttributeQuality(Instances data, Attribute att) throws Exception {
-        double yes_count = data.numClasses();
-        System.out.println(yes_count);
+
+        int[][] peaty = new int[data.attribute("Peaty").numValues()][data.numClasses()];
+
+
+        System.out.println(peaty);
+        for(Instance ins:data){
+            peaty[(int)ins.value(0)][(int)ins.classValue()]++;
+        }
+        for(int[] x:peaty) {
+            for (int y : x)
+                System.out.print(y + ",");
+            System.out.print("\n");
+        }
+
 
 
         return 0;
@@ -39,13 +52,14 @@ public class IGAttributeSplitMeasure extends AttributeSplitMeasure {
 
         String WhiskeyData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/src/main/java/ml_6002b_coursework/Whiskey_Region_Data.arff";
         Instances whiskey = LoadData(WhiskeyData);
+        System.out.println(whiskey.numClasses());
 
-        IGAttributeSplitMeasure ig = new IGAttributeSplitMeasure();
-        Attribute Peaty = whiskey.attribute("Peaty");
-
-//        Instances[] whiskey_split = ig.splitData(whiskey, Peaty);
-        double attribute_quality = ig.computeAttributeQuality(whiskey, Peaty);
-        System.out.println("Attribute Quality: " + attribute_quality);
+//        IGAttributeSplitMeasure ig = new IGAttributeSplitMeasure();
+//        Attribute Peaty = whiskey.attribute("Peaty");
+//
+////        Instances[] whiskey_split = ig.splitData(whiskey, Peaty);
+//        double attribute_quality = ig.computeAttributeQuality(whiskey, Peaty);
+//        System.out.println("Attribute Quality: " + attribute_quality);
 
     }
 
