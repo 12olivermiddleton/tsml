@@ -1,9 +1,9 @@
 @RELATION Whiskey
 
-@ATTRIBUTE Peaty {0,1}
-@ATTRIBUTE Woody {0,1}
-@ATTRIBUTE Sweet {0,1}
-@ATTRIBUTE Region {0,1}
+@Attribute Peaty {0,1}
+@Attribute Woody {0,1}
+@Attribute Sweet {0,1}
+@Attribute Region {0,1}
 
 @DATA
 
