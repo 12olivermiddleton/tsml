@@ -8,6 +8,10 @@ public class GiniAttributeSplitMeasure extends AttributeSplitMeasure{
 
     @Override
     public double computeAttributeQuality(Instances data, Attribute att) throws Exception {
+
+        //TODO will make call to AttributeMeasures and use measureGini
+        //TODO measureGini takes a contingency table for given Attribute att
+
         return 0;
     }
 
