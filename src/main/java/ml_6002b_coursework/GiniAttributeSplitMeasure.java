@@ -39,10 +39,11 @@ public class GiniAttributeSplitMeasure extends AttributeSplitMeasure{
 
         String WhiskeyData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/src/main/java/ml_6002b_coursework/Whiskey_Region_Data.arff";
         Instances whiskey = LoadData(WhiskeyData);
-        System.out.println(whiskey);
         GiniAttributeSplitMeasure gini = new GiniAttributeSplitMeasure();
+        Attribute Peaty = whiskey.attribute("Peaty");
         Instances[] whiskey_split = gini.splitData(whiskey, Peaty);
-        System.out.println(whiskey_split);
+
+        System.out.println(whiskey_split[1]);
 
 
 

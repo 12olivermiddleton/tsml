@@ -33,6 +33,14 @@ public class IGAttributeSplitMeasure extends AttributeSplitMeasure {
      */
     public static void main(String[] args) {
         System.out.println("Not Implemented.");
+
+        String WhiskeyData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/src/main/java/ml_6002b_coursework/Whiskey_Region_Data.arff";
+        Instances whiskey = LoadData(WhiskeyData);
+        IGAttributeSplitMeasure ig = new IGAttributeSplitMeasure();
+        Attribute Peaty = whiskey.attribute("Peaty");
+        Instances[] whiskey_split = ig.splitData(whiskey, Peaty);
+
+        System.out.println(whiskey_split[1]);
     }
 
 }
