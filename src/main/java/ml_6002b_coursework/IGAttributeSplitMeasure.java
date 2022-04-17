@@ -4,6 +4,7 @@ import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
 
+import java.io.BufferedReader;
 import java.io.FileReader;
 
 
@@ -13,8 +14,9 @@ public class IGAttributeSplitMeasure extends AttributeSplitMeasure {
 
         Instances dataset = null;
         try{
-            FileReader reader = new FileReader(file_path);
+            BufferedReader reader = new BufferedReader(new FileReader(file_path));
             dataset = new Instances(reader);
+            reader.close();
         }catch(Exception e) {
             System.out.println("Exception caught: " + e);
         }
@@ -49,12 +51,11 @@ public class IGAttributeSplitMeasure extends AttributeSplitMeasure {
      * @param args the options for the split measure main
      */
     public static void main(String[] args) throws Exception {
-
         String WhiskeyData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/src/main/java/ml_6002b_coursework/Whiskey_Region_Data.arff";
         Instances whiskey = LoadData(WhiskeyData);
-        int num = whiskey.numClasses();
-        System.out.println(num);
-//        System.out.println(whiskey.numClasses());
+//        int num = whiskey.numClasses();
+//        System.out.println(num);
+        System.out.println(whiskey.numClasses());
 
 //        IGAttributeSplitMeasure ig = new IGAttributeSplitMeasure();
 //        Attribute Peaty = whiskey.attribute("Peaty");
