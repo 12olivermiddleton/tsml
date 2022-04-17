@@ -5,7 +5,7 @@
 @Attribute Sweet {0,1}
 @Attribute Region {0,1}
 
-@DATA
+@data
 
 1, 0, 1, 0
 1, 1, 1, 0
