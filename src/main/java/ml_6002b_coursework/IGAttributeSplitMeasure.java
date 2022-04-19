@@ -5,13 +5,13 @@ import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 
+public class IGAttributeSplitMeasure extends AttributeSplitMeasure{
 
-public class IGAttributeSplitMeasure extends AttributeSplitMeasure {
+    // When useGain is false, use information gain
+    // When useGain is true, use information gain ratio
+
+    public boolean useGain = false;
 
 
     @Override
@@ -24,21 +24,23 @@ public class IGAttributeSplitMeasure extends AttributeSplitMeasure {
         for(Instance ins:data){
             att_cont_table[(int)ins.value(attribute_index)][(int)ins.classValue()]++;
         }
-        for(int[] x:att_cont_table) {
-            for (int y : x)
-                System.out.print(y + ",");
-            System.out.print("\n");
-        }
-        System.out.println(att_cont_table[0][0] + ":" + att_cont_table[0][1] + ":" + att_cont_table[1][0] + ":" + att_cont_table[1][1]);
+//        for(int[] x:att_cont_table) {
+//            for (int y : x)
+//                System.out.print(y + ",");
+//            System.out.print("\n");
+//        }
+//        System.out.println(att_cont_table[0][0] + ":" + att_cont_table[0][1] + ":" + att_cont_table[1][0] + ":" + att_cont_table[1][1]);
 
         AttributeMeasures am = new AttributeMeasures();
-        double ig = am.measureInformationGain(att_cont_table);
-        double igr = am.measureInformationGainRatio(att_cont_table);
-        System.out.println("ig: "+ig);
-        System.out.println("igr: "+ igr);
-
-
-        return 0;
+        if(useGain==false){
+            double ig = am.measureInformationGain(att_cont_table);
+            System.out.println("ig: "+ig);
+            return ig;
+        }else{
+            double igr = am.measureInformationGainRatio(att_cont_table);
+            System.out.println("igr: "+ igr);
+            return igr;
+        }
     }
 
     /**
@@ -51,6 +53,8 @@ public class IGAttributeSplitMeasure extends AttributeSplitMeasure {
         Instances whiskey = DatasetLoading.loadData(WhiskeyData);
 
         IGAttributeSplitMeasure ig = new IGAttributeSplitMeasure();
+        // set the useGain
+        ig.useGain=true;
         Attribute Peaty = whiskey.attribute("Peaty");
 
 //        Instances[] whiskey_split = ig.splitData(whiskey, Peaty);
