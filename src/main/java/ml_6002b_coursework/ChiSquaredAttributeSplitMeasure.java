@@ -5,15 +5,12 @@ import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
 
-import java.io.FileReader;
-import java.io.IOException;
-
 
 public class ChiSquaredAttributeSplitMeasure extends AttributeSplitMeasure{
 
 
     @Override
-    public double computeAttributeQuality(Instances data, Attribute att) throws Exception {
+    public double computeAttributeQuality(Instances data, Attribute att){
 
 
         int attribute_index = att.index();
