@@ -45,7 +45,7 @@ public class GiniAttributeSplitMeasure extends AttributeSplitMeasure{
         Instances whiskey = DatasetLoading.loadData(WhiskeyData);
 
         GiniAttributeSplitMeasure gini = new GiniAttributeSplitMeasure();
-        Attribute Peaty = whiskey.attribute("Peaty");
+        Attribute Peaty = whiskey.attribute("Sweet");
 
         double attribute_quality = gini.computeAttributeQuality(whiskey, Peaty);
         System.out.println("Attribute Quality: " + attribute_quality);

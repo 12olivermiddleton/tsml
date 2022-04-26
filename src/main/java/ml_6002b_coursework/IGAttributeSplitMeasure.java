@@ -24,21 +24,13 @@ public class IGAttributeSplitMeasure extends AttributeSplitMeasure{
         for(Instance ins:data){
             att_cont_table[(int)ins.value(attribute_index)][(int)ins.classValue()]++;
         }
-//        for(int[] x:att_cont_table) {
-//            for (int y : x)
-//                System.out.print(y + ",");
-//            System.out.print("\n");
-//        }
-//        System.out.println(att_cont_table[0][0] + ":" + att_cont_table[0][1] + ":" + att_cont_table[1][0] + ":" + att_cont_table[1][1]);
 
         AttributeMeasures am = new AttributeMeasures();
         if(useGain==false){
             double ig = am.measureInformationGain(att_cont_table);
-            System.out.println("ig: "+ig);
             return ig;
         }else{
             double igr = am.measureInformationGainRatio(att_cont_table);
-            System.out.println("igr: "+ igr);
             return igr;
         }
     }
@@ -49,17 +41,29 @@ public class IGAttributeSplitMeasure extends AttributeSplitMeasure{
      * @param args the options for the split measure main
      */
     public static void main(String[] args) throws Exception {
-        String WhiskeyData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/src/main/java/ml_6002b_coursework/Whiskey_Region_Data.arff";
-        Instances whiskey = DatasetLoading.loadData(WhiskeyData);
+//        String WhiskeyData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/src/main/java/ml_6002b_coursework/Whiskey_Region_Data.arff";
+//        Instances whiskey = DatasetLoading.loadData(WhiskeyData);
+//
+//        IGAttributeSplitMeasure ig = new IGAttributeSplitMeasure();
+//        // set the useGain
+//        ig.useGain=true;
+//        Attribute Peaty = whiskey.attribute("Peaty");
+//
+////        Instances[] whiskey_split = ig.splitData(whiskey, Peaty);
+//        double attribute_quality = ig.computeAttributeQuality(whiskey, Peaty);
+//        System.out.println("Attribute Quality: " + attribute_quality);
+//        ig.splitDataOnNumeric(whiskey, Peaty);
 
-        IGAttributeSplitMeasure ig = new IGAttributeSplitMeasure();
-        // set the useGain
-        ig.useGain=true;
-        Attribute Peaty = whiskey.attribute("Peaty");
 
-//        Instances[] whiskey_split = ig.splitData(whiskey, Peaty);
-        double attribute_quality = ig.computeAttributeQuality(whiskey, Peaty);
-        System.out.println("Attribute Quality: " + attribute_quality);
+        String optData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/src/main/java/ml_6002b_coursework/test_data/Chinatown_TRAIN.arff";
+
+        Instances opt = DatasetLoading.loadData(optData);
+        IGAttributeSplitMeasure igOpt = new IGAttributeSplitMeasure();
+
+        Attribute att_22 = opt.attribute("att3");
+        Instances[] splitData = igOpt.splitDataOnNumeric(opt, att_22);
+        System.out.println(splitData[0].stream().count());
+        System.out.println(splitData[1].stream().count());
 
     }
 

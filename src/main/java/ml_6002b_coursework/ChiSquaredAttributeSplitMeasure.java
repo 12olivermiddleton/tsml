@@ -20,17 +20,11 @@ public class ChiSquaredAttributeSplitMeasure extends AttributeSplitMeasure{
         for(Instance ins:data){
             att_cont_table[(int)ins.value(attribute_index)][(int)ins.classValue()]++;
         }
-//        for(int[] x:att_cont_table) {
-//            for (int y : x)
-//                System.out.print(y + ",");
-//            System.out.print("\n");
-//        }
-        System.out.println(att_cont_table[0][0] + ":" + att_cont_table[0][1] + ":" + att_cont_table[1][0] + ":" + att_cont_table[1][1]);
 
         AttributeMeasures am = new AttributeMeasures();
 
         double chi = am.measureChiSquared(att_cont_table);
-        System.out.println("chi: "+chi);
+
         return chi;
     }
 
@@ -45,7 +39,7 @@ public class ChiSquaredAttributeSplitMeasure extends AttributeSplitMeasure{
         Instances whiskey = DatasetLoading.loadData(WhiskeyData);
 
         ChiSquaredAttributeSplitMeasure chi = new ChiSquaredAttributeSplitMeasure();
-        Attribute Peaty = whiskey.attribute("Peaty");
+        Attribute Peaty = whiskey.attribute("Sweet");
 
         double attribute_quality = chi.computeAttributeQuality(whiskey, Peaty);
         System.out.println("Attribute Quality: " + attribute_quality);

@@ -49,8 +49,6 @@ public class AttributeMeasures {
         double class0_count = attribute[0][0] + attribute[1][0];
         double class1_count = attribute[0][1] + attribute[1][1];
         double total_cases = class0_count + class1_count;
-//        double class0_prob = class0_count / total_cases;
-//        double class1_prob = class1_count / total_cases;
 
         // entropy for yes
         double yes_cases = attribute[0][0] + attribute[0][1];

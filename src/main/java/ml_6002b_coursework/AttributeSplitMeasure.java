@@ -13,6 +13,49 @@ public abstract class AttributeSplitMeasure {
 
     public abstract double computeAttributeQuality(Instances data, Attribute att) throws Exception;
 
+
+
+    public Instances[] splitDataOnNumeric(Instances data, Attribute att) throws Exception {
+        if(att.isNumeric()){
+            int noOfSplits = 2;
+            Instances[] splitData = new Instances[noOfSplits];
+            for (int i = 0; i < noOfSplits; i++) {
+                splitData[i] = new Instances(data, data.numInstances());
+            }
+
+            int splitPoint = (int)data.meanOrMode(att);
+            int subset;
+
+            for (Instance inst: data) {
+                if(inst.value(att)<splitPoint){
+                    splitData[0].add(inst);
+                }else{
+                    splitData[1].add(inst);
+                }
+            }
+
+            for (Instances split : splitData) {
+                split.compactify();
+            }
+
+            return splitData;
+
+        }else{
+            throw new Exception("Unknown data type");
+        }
+
+
+//        int[] count = new int[data.numClasses()];
+//        for(Instance ins:data){
+//            int c=(int)ins.classValue();
+//            count[c]++;
+//        }
+//        double[] classDistribution = new double[data.numClasses()];
+//        for(int i=0;i<data.numClasses();i++){
+//            classDistribution[i]=count[i]/(double)data.numInstances();
+
+    }
+
     /**
      * Splits a dataset according to the values of a nominal attribute.
      *
