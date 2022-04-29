@@ -24,7 +24,7 @@ public abstract class AttributeSplitMeasure {
             }
 
             int splitPoint = (int)data.meanOrMode(att);
-            int subset;
+//            int subset;
 
             for (Instance inst: data) {
                 if(inst.value(att)<splitPoint){
