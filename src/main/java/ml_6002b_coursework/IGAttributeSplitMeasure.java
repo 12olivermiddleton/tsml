@@ -55,7 +55,7 @@ public class IGAttributeSplitMeasure extends AttributeSplitMeasure{
 //        ig.splitDataOnNumeric(whiskey, Peaty);
 
 
-        String optData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/src/main/java/ml_6002b_coursework/test_data/Chinatown_TRAIN.arff";
+        String optData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/tsml/src/main/java/ml_6002b_coursework/test_data/Chinatown_TRAIN.arff";
 
         Instances opt = DatasetLoading.loadData(optData);
         IGAttributeSplitMeasure igOpt = new IGAttributeSplitMeasure();
