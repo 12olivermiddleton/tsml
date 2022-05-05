@@ -278,7 +278,7 @@ public class CourseworkTree extends AbstractClassifier {
      */
     public static void main(String[] args) throws Exception {
 
-        String WhiskeyData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/src/main/java/ml_6002b_coursework/Whiskey_Region_Data.arff";
+        String WhiskeyData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/tsml/src/main/java/ml_6002b_coursework/Whiskey_Region_Data.arff";
         Instances whiskey = DatasetLoading.loadData(WhiskeyData);
 
         CourseworkTree cwTree = new CourseworkTree();

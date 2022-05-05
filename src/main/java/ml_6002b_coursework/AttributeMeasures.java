@@ -31,8 +31,20 @@ public class AttributeMeasures {
     }
 
     public static double splitInfo(int[][] attribute){
-        double yes_count = attribute[0][0] + attribute[0][1];
-        double no_count = attribute[1][0] + attribute[1][1];
+
+        double yes_count = 0;
+        for(int x = 0; x<attribute[0].length; x++){
+            yes_count += attribute[0][x];
+        }
+        double no_count = 0;
+        for(int x = 0; x<attribute[1].length; x++){
+            no_count += attribute[1][x];
+        }
+
+        System.out.println(yes_count + ":"+ no_count);
+
+//        double yes_count = attribute[0][0] + attribute[0][1];
+//        double no_count = attribute[1][0] + attribute[1][1];
         double total_count = yes_count + no_count;
 
         double prob_yes = yes_count / total_count;
@@ -92,8 +104,17 @@ public class AttributeMeasures {
 
     // Returns the gini measure for a given attributes contingency table
     public static double measureGini(int[][] attribute){
-        double yes_count = attribute[0][0] + attribute[0][1];
-        double no_count = attribute[1][0] + attribute[1][1];
+//        double yes_count = attribute[0][0] + attribute[0][1];
+//        double no_count = attribute[1][0] + attribute[1][1];
+
+        double yes_count = 0;
+        for(int x = 0; x<attribute[0].length; x++){
+            yes_count += attribute[0][x];
+        }
+        double no_count = 0;
+        for(int x = 0; x<attribute[1].length; x++){
+            no_count += attribute[1][x];
+        }
         double total_count = yes_count + no_count;
 
         double prob_yes = yes_count / total_count;
@@ -109,11 +130,31 @@ public class AttributeMeasures {
     // Returns chi squared measure for a given attributes contingency table
     public static double measureChiSquared(int[][] attribute){
 
-        double yes_count = attribute[0][0] + attribute[0][1];
-        double no_count = attribute[1][0] + attribute[1][1];
+//        double yes_count = attribute[0][0] + attribute[0][1];
+//        double no_count = attribute[1][0] + attribute[1][1];
 
-        double islay_count = attribute[0][0] + attribute[1][0];
-        double speyside_count = attribute[0][1] + attribute[1][1];
+        double yes_count = 0;
+        for(int x = 0; x<attribute[0].length; x++){
+            yes_count += attribute[0][x];
+        }
+        double no_count = 0;
+        for(int x = 0; x<attribute[1].length; x++){
+            no_count += attribute[1][x];
+        }
+
+//        double islay_count = attribute[0][0] + attribute[1][0];
+//        double speyside_count = attribute[0][1] + attribute[1][1];
+
+        double islay_count = 0;
+        for(int x = 0; x<attribute.length; x++){
+            islay_count += attribute[x][0];
+        }
+        double speyside_count = 0;
+        for(int x = 0; x<attribute[1].length; x++){
+            speyside_count += attribute[x][1];
+        }
+
+
 
         double total_count = islay_count + speyside_count;
 
@@ -125,14 +166,19 @@ public class AttributeMeasures {
                 {no_count*prob_islay, no_count*prob_speyside}
         };
 
+        double chi_squared=0;
+        for (int i = 0; i<attribute.length; i++){
+            for (int j = 0; j<attribute[i].length; j++) {
+                chi_squared += Math.pow((attribute[i][j] - expected_attribute_values[i][j]), 2) / expected_attribute_values[i][j];
+            }}
 
 
-        double chi_squared = (
-                (Math.pow((attribute[0][0] - expected_attribute_values[0][0]), 2)/expected_attribute_values[0][0])
-                + (Math.pow((attribute[0][1] - expected_attribute_values[0][1]), 2)/expected_attribute_values[0][1])
-                + (Math.pow((attribute[1][0] - expected_attribute_values[1][0]), 2)/expected_attribute_values[1][0])
-                + (Math.pow((attribute[1][1] - expected_attribute_values[1][1]), 2)/expected_attribute_values[1][1])
-        );
+//        double chi_squared = (
+//                (Math.pow((attribute[0][0] - expected_attribute_values[0][0]), 2)/expected_attribute_values[0][0])
+//                + (Math.pow((attribute[0][1] - expected_attribute_values[0][1]), 2)/expected_attribute_values[0][1])
+//                + (Math.pow((attribute[1][0] - expected_attribute_values[1][0]), 2)/expected_attribute_values[1][0])
+//                + (Math.pow((attribute[1][1] - expected_attribute_values[1][1]), 2)/expected_attribute_values[1][1])
+//        );
         return chi_squared;
 
     }
