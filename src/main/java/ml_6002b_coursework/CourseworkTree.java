@@ -4,6 +4,8 @@ import experiments.data.DatasetLoading;
 import scala.tools.nsc.backend.jvm.GenASM;
 import tsml.transformers.shapelet_tools.quality_measures.InformationGain;
 import weka.classifiers.AbstractClassifier;
+import weka.classifiers.Classifier;
+import weka.classifiers.Evaluation;
 import weka.core.*;
 
 import java.io.IOException;
@@ -278,22 +280,66 @@ public class CourseworkTree extends AbstractClassifier {
      */
     public static void main(String[] args) throws Exception {
 
-        String WhiskeyData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/tsml/src/main/java/ml_6002b_coursework/Whiskey_Region_Data.arff";
-        Instances whiskey = DatasetLoading.loadData(WhiskeyData);
+//        String optData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/tsml/src/main/java/ml_6002b_coursework/test_data/optdigits.arff";
+        String optData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/tsml/src/main/java/ml_6002b_coursework/Whiskey_Region_Data.arff";
+        Instances opt = DatasetLoading.loadData(optData);
+
+
+        opt.randomize(new java.util.Random());	// randomize instance order before splitting dataset
+        Instances trainData = opt.trainCV(9, 8);
+        Instances testData = opt.testCV(7, 6);
+        System.out.println(trainData.numInstances());
+        System.out.println(testData.numInstances());
+
 
         CourseworkTree cwTree = new CourseworkTree();
+
         IGAttributeSplitMeasure ig = new IGAttributeSplitMeasure();
+
+        IGAttributeSplitMeasure igr = new IGAttributeSplitMeasure();
         ig.useGain=true;
 
-        cwTree.setAttSplitMeasure(new ChiSquaredAttributeSplitMeasure());
-        cwTree.buildClassifier(whiskey);
-        System.out.println(cwTree.root);
-        System.out.println(cwTree.root.children[0]+"-:-"+cwTree.root.children[1]);
-        System.out.println("-----------------------------");
+        ChiSquaredAttributeSplitMeasure chi = new ChiSquaredAttributeSplitMeasure();
 
-        CourseworkTree cwTreeOptions = new CourseworkTree();
-        cwTreeOptions.setOptions("igr");
-        cwTreeOptions.buildClassifier(whiskey);
-        System.out.println(cwTreeOptions.root+" -:- "+cwTreeOptions.root.children[0]);
+        GiniAttributeSplitMeasure gini = new GiniAttributeSplitMeasure();
+
+
+        cwTree.setAttSplitMeasure(chi);
+        cwTree.getCapabilities();
+
+
+        cwTree.buildClassifier(opt);
+        Evaluation eval_ig = new Evaluation(trainData);
+        eval_ig.evaluateModel(cwTree, testData);
+        System.out.println(eval_ig.toSummaryString("\nResults\n======\n", false));
+
+//        System.out.println(cwTree.root);
+//        System.out.println(cwTree.root.children[0]+"-:-"+cwTree.root.children[1]);
+//        System.out.println("-----------------------------");
+
+
+
+//        // train classifier
+//        Classifier cls = new J48();
+//        cls.buildClassifier(train);
+//        // evaluate classifier and print some statistics
+//        Evaluation eval = new Evaluation(train);
+//        eval.evaluateModel(cls, test);
+//        System.out.println(eval.toSummaryString("\nResults\n======\n", false));
+//
+//        CourseworkTree cwTreeOptions = new CourseworkTree();
+//        cwTreeOptions.setOptions("igr");
+//        cwTreeOptions.buildClassifier(whiskey);
+//        System.out.println(cwTreeOptions.root+" -:- "+cwTreeOptions.root.children[0]);
+
+
+
+//
+//        IGAttributeSplitMeasure igOpt = new IGAttributeSplitMeasure();
+//
+//        Attribute att_22 = opt.attribute("att3");
+//        Instances[] splitData = igOpt.splitDataOnNumeric(opt, att_22);
+//        System.out.println(splitData[0].stream().count());
+//        System.out.println(splitData[1].stream().count());
     }
 }

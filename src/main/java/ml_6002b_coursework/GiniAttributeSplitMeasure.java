@@ -20,17 +20,11 @@ public class GiniAttributeSplitMeasure extends AttributeSplitMeasure{
         for(Instance ins:data){
             att_cont_table[(int)ins.value(attribute_index)][(int)ins.classValue()]++;
         }
-//        for(int[] x:att_cont_table) {
-//            for (int y : x)
-//                System.out.print(y + ",");
-//            System.out.print("\n");
-//        }
-        System.out.println(att_cont_table[0][0] + ":" + att_cont_table[0][1] + ":" + att_cont_table[1][0] + ":" + att_cont_table[1][1]);
 
         AttributeMeasures am = new AttributeMeasures();
 
         double gini = am.measureGini(att_cont_table);
-        System.out.println("chi: "+gini);
+
         return gini;
     }
 
@@ -45,14 +39,18 @@ public class GiniAttributeSplitMeasure extends AttributeSplitMeasure{
         Instances whiskey = DatasetLoading.loadData(WhiskeyData);
 
         GiniAttributeSplitMeasure gini = new GiniAttributeSplitMeasure();
-        Attribute Peaty = whiskey.attribute("Sweet");
+        Attribute Peaty = whiskey.attribute("Peaty");
+        Attribute Woody = whiskey.attribute("Woody");
+        Attribute Sweet = whiskey.attribute("Sweet");
+
+        double peaty_attribute_quality_gini = gini.computeAttributeQuality(whiskey, Peaty);
+        double woody_attribute_quality_gini = gini.computeAttributeQuality(whiskey, Woody);
+        double sweet_attribute_quality_gini = gini.computeAttributeQuality(whiskey, Sweet);
 
         double attribute_quality = gini.computeAttributeQuality(whiskey, Peaty);
-        System.out.println("Attribute Quality: " + attribute_quality);
-
-
-//        Instances[] whiskey_split = gini.splitData(whiskey, Peaty);
-//        System.out.println(whiskey_split[1]);
+        System.out.println("measureGini for Peaty splitting diagnosis =  " + peaty_attribute_quality_gini);
+        System.out.println("measureGini for Woody splitting diagnosis =  " + woody_attribute_quality_gini);
+        System.out.println("measureGini for Sweet splitting diagnosis =  " + sweet_attribute_quality_gini);
 
     }
 

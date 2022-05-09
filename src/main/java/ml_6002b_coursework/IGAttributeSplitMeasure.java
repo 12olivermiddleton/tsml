@@ -5,6 +5,9 @@ import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
 
+import java.io.File;
+import java.net.URL;
+
 
 public class IGAttributeSplitMeasure extends AttributeSplitMeasure{
 
@@ -35,36 +38,42 @@ public class IGAttributeSplitMeasure extends AttributeSplitMeasure{
         }
     }
 
-    /**
-     * Main method.
-     *
-     * @param args the options for the split measure main
-     */
-    public static void main(String[] args) throws Exception {
-//        String WhiskeyData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/src/main/java/ml_6002b_coursework/Whiskey_Region_Data.arff";
-//        Instances whiskey = DatasetLoading.loadData(WhiskeyData);
-//
-//        IGAttributeSplitMeasure ig = new IGAttributeSplitMeasure();
-//        // set the useGain
-//        ig.useGain=true;
-//        Attribute Peaty = whiskey.attribute("Peaty");
-//
-////        Instances[] whiskey_split = ig.splitData(whiskey, Peaty);
-//        double attribute_quality = ig.computeAttributeQuality(whiskey, Peaty);
-//        System.out.println("Attribute Quality: " + attribute_quality);
-//        ig.splitDataOnNumeric(whiskey, Peaty);
+
+        /**
+         * Main method.
+         *
+         * @param args the options for the split measure main
+         */
+        public static void main(String[] args) throws Exception {
 
 
-        String optData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/tsml/src/main/java/ml_6002b_coursework/test_data/Chinatown_TRAIN.arff";
 
-        Instances opt = DatasetLoading.loadData(optData);
-        IGAttributeSplitMeasure igOpt = new IGAttributeSplitMeasure();
+            String WhiskeyData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/src/main/java/ml_6002b_coursework/Whiskey_Region_Data.arff";
+            Instances whiskey = DatasetLoading.loadData(WhiskeyData);
 
-        Attribute att_22 = opt.attribute("att3");
-        Instances[] splitData = igOpt.splitDataOnNumeric(opt, att_22);
-        System.out.println(splitData[0].stream().count());
-        System.out.println(splitData[1].stream().count());
+            IGAttributeSplitMeasure ig = new IGAttributeSplitMeasure();
 
+            Attribute Peaty = whiskey.attribute("Peaty");
+            Attribute Woody = whiskey.attribute("Woody");
+            Attribute Sweet = whiskey.attribute("Sweet");
+
+            double peaty_attribute_quality_ig = ig.computeAttributeQuality(whiskey, Peaty);
+            double woody_attribute_quality_ig = ig.computeAttributeQuality(whiskey, Woody);
+            double sweet_attribute_quality_ig = ig.computeAttributeQuality(whiskey, Sweet);
+
+            System.out.println("measureInformationGain for Peaty splitting diagnosis = "+peaty_attribute_quality_ig);
+            System.out.println("measureInformationGain for Woody splitting diagnosis = "+woody_attribute_quality_ig);
+            System.out.println("measureInformationGain for Sweet splitting diagnosis = "+sweet_attribute_quality_ig);
+
+            // set the useGain
+            ig.useGain=true;
+            double peaty_attribute_quality_igr = ig.computeAttributeQuality(whiskey, Peaty);
+            double woody_attribute_quality_igr = ig.computeAttributeQuality(whiskey, Woody);
+            double sweet_attribute_quality_igr = ig.computeAttributeQuality(whiskey, Sweet);
+
+            System.out.println("measureInformationGainRatio for Peaty splitting diagnosis = " + peaty_attribute_quality_igr);
+            System.out.println("measureInformationGainRatio for Woody splitting diagnosis = "+woody_attribute_quality_igr);
+            System.out.println("measureInformationGainRatio for Sweet splitting diagnosis = "+sweet_attribute_quality_igr);
     }
 
 }

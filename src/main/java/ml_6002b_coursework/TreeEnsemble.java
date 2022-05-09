@@ -11,7 +11,9 @@ import java.util.Random;
 public class TreeEnsemble extends AbstractClassifier {
 
     ArrayList<Classifier> ensemble;
-    int numTrees = 50;
+    public int numTrees = 50;
+    // If averageDistributions false, use counting, else use average distributions
+    public boolean averageDistributions = false;
 
 
     public TreeEnsemble(){
@@ -68,21 +70,40 @@ public class TreeEnsemble extends AbstractClassifier {
     @Override
     public double[] distributionForInstance(Instance inst) throws Exception {
 
+
         double[] probs = new double[inst.numClasses()];
-        for(Classifier c: ensemble){
+        for (Classifier c : ensemble) {
             double[] d = c.distributionForInstance(inst);
-            for(int i=0; i<d.length; i++){
-                probs[i]+=d[i];
+            for (int i = 0; i < d.length; i++) {
+                probs[i] += d[i];
             }
         }
-        double sum=0;
-        for(int i=0; i<probs.length; i++){
-            sum+=probs[i];
-        }
-        for(int i=0; i<probs.length; i++){
-            probs[i]/=sum;
+
+
+        if (!averageDistributions) {
+            double sum = 0;
+            for (double prob : probs) {
+                sum += prob;
+            }
+            for (int i = 0; i < probs.length; i++) {
+                probs[i] /= sum;
+            }
+
+            return probs;
+        } else {
+            double sum = 0;
+            for (double prob : probs) {
+                sum += prob;
+            }
+            for (int i = 0; i < probs.length; i++) {
+                probs[i] /= sum;
+            }
+
+            return probs;
+
         }
 
-        return probs;
     }
+
+
 }

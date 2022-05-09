@@ -39,10 +39,18 @@ public class ChiSquaredAttributeSplitMeasure extends AttributeSplitMeasure{
         Instances whiskey = DatasetLoading.loadData(WhiskeyData);
 
         ChiSquaredAttributeSplitMeasure chi = new ChiSquaredAttributeSplitMeasure();
-        Attribute Peaty = whiskey.attribute("Sweet");
+        Attribute Peaty = whiskey.attribute("Peaty");
+        Attribute Woody = whiskey.attribute("Woody");
+        Attribute Sweet = whiskey.attribute("Sweet");
 
-        double attribute_quality = chi.computeAttributeQuality(whiskey, Peaty);
-        System.out.println("Attribute Quality: " + attribute_quality);
+        double peaty_attribute_quality_chi = chi.computeAttributeQuality(whiskey, Peaty);
+        double woody_attribute_quality_chi = chi.computeAttributeQuality(whiskey, Woody);
+        double sweet_attribute_quality_chi = chi.computeAttributeQuality(whiskey, Sweet);
+
+        System.out.println("measureChiSquared for Peaty splitting diagnosis =  " + peaty_attribute_quality_chi);
+        System.out.println("measureChiSquared for Woody splitting diagnosis =  " + woody_attribute_quality_chi);
+        System.out.println("measureChiSquared for Sweet splitting diagnosis =  " + sweet_attribute_quality_chi);
+
     }
 
 }
