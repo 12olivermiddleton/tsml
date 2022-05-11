@@ -5,27 +5,71 @@ import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
 
+import java.util.Arrays;
+
 
 public class ChiSquaredAttributeSplitMeasure extends AttributeSplitMeasure{
 
 
     @Override
-    public double computeAttributeQuality(Instances data, Attribute att){
+    public double computeAttributeQuality(Instances data, Attribute att) throws Exception {
 
+        /**
+         * Data in form:
+         * This example data is the data for peaty
+         *
+         *    Islay     Speyside
+         *      4          0        Yes(1)
+         *      1          5        No(0)
+         *
+         */
 
         int attribute_index = att.index();
 
-        int[][] att_cont_table = new int[data.attribute(attribute_index).numValues()][data.numClasses()];
+        if(att.isNumeric()){
 
-        for(Instance ins:data){
-            att_cont_table[(int)ins.value(attribute_index)][(int)ins.classValue()]++;
+            // Split data on numeric value
+            Instances[] split = splitDataOnNumeric(data, att);
+            Instances splitBelow = split[0];
+            Instances splitAbove = split[1];
+            System.out.println(data.attribute(attribute_index).numValues());
+
+
+            int[][] att_cont_table = new int[data.attribute(attribute_index).numValues()][data.numClasses()];
+
+
+            for(Instance ins:data){
+                att_cont_table[(int)ins.value(attribute_index)][(int)ins.classValue()]++;
+            }
+
+//            System.out.println(Arrays.stream(att_cont_table).iterator());
+
+
+            AttributeMeasures am = new AttributeMeasures();
+
+            double chi = am.measureChiSquared(att_cont_table);
+
+            return chi;
+
+
+        }else{
+            String name = att.name();
+//            System.out.println(name);
+//            System.out.println("not nominal"+ data.attribute(attribute_index).numValues());
+//            System.out.println("num classes"+data.numClasses());
+            int[][] att_cont_table = new int[data.attribute(attribute_index).numValues()][data.numClasses()];
+
+            for(Instance ins:data){
+                att_cont_table[(int)ins.value(attribute_index)][(int)ins.classValue()]++;
+            }
+
+            AttributeMeasures am = new AttributeMeasures();
+
+            double chi = am.measureChiSquared(att_cont_table);
+
+            return chi;
         }
 
-        AttributeMeasures am = new AttributeMeasures();
-
-        double chi = am.measureChiSquared(att_cont_table);
-
-        return chi;
     }
 
     /**

@@ -288,8 +288,8 @@ public class CourseworkTree extends AbstractClassifier {
         opt.randomize(new java.util.Random());	// randomize instance order before splitting dataset
         Instances trainData = opt.trainCV(9, 8);
         Instances testData = opt.testCV(7, 6);
-        System.out.println(trainData.numInstances());
-        System.out.println(testData.numInstances());
+//        System.out.println(trainData.numInstances());
+//        System.out.println(testData.numInstances());
 
 
         CourseworkTree cwTree = new CourseworkTree();
