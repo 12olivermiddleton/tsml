@@ -39,6 +39,7 @@ public class ChiSquaredAttributeSplitMeasure extends AttributeSplitMeasure{
 
 
             for(Instance ins:data){
+                System.out.println((int)ins.value(attribute_index));
                 att_cont_table[(int)ins.value(attribute_index)][(int)ins.classValue()]++;
             }
 

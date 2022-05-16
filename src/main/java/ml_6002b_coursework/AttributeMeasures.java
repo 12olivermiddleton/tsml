@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
  *
  */
 public class AttributeMeasures {
-    //TODO The edge case occurs when the entropy of a given class is 0
+    // The edge case occurs when the entropy of a given class is 0
 
     public static double log2(double x) {
         return (Math.log(x) / Math.log(2));

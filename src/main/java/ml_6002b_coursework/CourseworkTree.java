@@ -280,14 +280,31 @@ public class CourseworkTree extends AbstractClassifier {
      */
     public static void main(String[] args) throws Exception {
 
-//        String optData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/tsml/src/main/java/ml_6002b_coursework/test_data/optdigits.arff";
-        String optData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/tsml/src/main/java/ml_6002b_coursework/Whiskey_Region_Data.arff";
+        String optData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/tsml/src/main/java/ml_6002b_coursework/test_data/optdigits.arff";
+        String whiskeyData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/tsml/src/main/java/ml_6002b_coursework/Whiskey_Region_Data.arff";
+        String chinaData = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/tsml/src/main/java/ml_6002b_coursework/test_data/Chinatown_TRAIN.arff";
+        String facesUCR_TRAIN = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/tsml/src/main/java/ml_6002b_coursework/test_data/FacesUCR/FacesUCR_TRAIN.arff";
+        String facesUCR_TEST = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/tsml/src/main/java/ml_6002b_coursework/test_data/FacesUCR/FacesUCR_TEST.arff";
+
         Instances opt = DatasetLoading.loadData(optData);
+        Instances whiskey = DatasetLoading.loadData(whiskeyData);
+        Instances china = DatasetLoading.loadData(chinaData);
+        Instances faces_TRAIN = DatasetLoading.loadData(facesUCR_TRAIN);
+        Instances faces_TEST = DatasetLoading.loadData(facesUCR_TEST);
+
+        System.out.println(opt.toSummaryString());
+        System.out.println(whiskey.toSummaryString());
+        System.out.println(china.toSummaryString());
+        System.out.println(faces_TRAIN.toSummaryString());
+        System.out.println(faces_TEST.toSummaryString());
 
 
-        opt.randomize(new java.util.Random());	// randomize instance order before splitting dataset
-        Instances trainData = opt.trainCV(9, 8);
-        Instances testData = opt.testCV(7, 6);
+
+
+
+        whiskey.randomize(new java.util.Random());	// randomize instance order before splitting dataset
+        Instances trainData = whiskey.trainCV(9, 8);
+        Instances testData = whiskey.testCV(7, 6);
 //        System.out.println(trainData.numInstances());
 //        System.out.println(testData.numInstances());
 
@@ -305,7 +322,7 @@ public class CourseworkTree extends AbstractClassifier {
 
 
         cwTree.setAttSplitMeasure(chi);
-        cwTree.getCapabilities();
+//        cwTree.getCapabilities();
 
 
         cwTree.buildClassifier(opt);
