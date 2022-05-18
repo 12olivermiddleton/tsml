@@ -2,6 +2,7 @@ package ml_6002b_coursework;
 
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
+import weka.classifiers.trees.J48;
 import weka.core.Instance;
 import weka.core.Instances;
 
@@ -45,8 +46,6 @@ public class TreeEnsemble extends AbstractClassifier {
         int index = random.nextInt(options.length);
         String option = options[index];
         return option;
-
-
 
     }
 

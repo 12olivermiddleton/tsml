@@ -5,6 +5,7 @@ import weka.classifiers.Classifier;
 import weka.classifiers.evaluation.Evaluation;
 import weka.classifiers.trees.Id3;
 import weka.classifiers.trees.J48;
+import weka.classifiers.trees.RandomForest;
 import weka.core.Instances;
 
 import java.io.IOException;
@@ -153,48 +154,60 @@ public class Experiments {
         opt.randomize(new java.util.Random());	// randomize order of instances before splitting dataset
         Instances optTrainData = opt.trainCV(30, 29);
         Instances optTestData = opt.testCV(30, 29);
-        Classifier optClassifier = new CourseworkTree();
+        Classifier optClassifier = new TreeEnsemble();
         optClassifier.buildClassifier(optTrainData);
         Evaluation evalOpt = new Evaluation(optTrainData);
         evalOpt.evaluateModel(optClassifier, optTrainData);
         evalOpt.evaluateModel(optClassifier, optTestData);
         System.out.println("1-NN accuracy for test data set opt: \n"+ evalOpt.pctCorrect()/100);
         System.out.println("opt\n"+evalOpt.toSummaryString());
+        System.out.println("Relation: "+opt.relationName());
+        System.out.println("Instances: "+opt.numInstances());
+        System.out.println("classes: "+opt.numClasses()+"\n");
 
         whiskey.randomize(new java.util.Random());	// randomize order of instances before splitting dataset
         Instances whiskeyTrain = whiskey.trainCV(10, 9);
         Instances whiskeyTest = whiskey.testCV(10, 9);
-        Classifier whiskeyClassifier = new CourseworkTree();
+        Classifier whiskeyClassifier = new TreeEnsemble();
         whiskeyClassifier.buildClassifier(whiskeyTrain);
         Evaluation evalWhiskey = new Evaluation(whiskeyTrain);
         evalWhiskey.evaluateModel(whiskeyClassifier, whiskeyTrain);
         evalWhiskey.evaluateModel(whiskeyClassifier, whiskeyTest);
         System.out.println("1-NN accuracy for test data set whiskey: \n"+ evalWhiskey.pctCorrect()/100);
         System.out.println("whiskey\n"+evalWhiskey.toSummaryString());
+        System.out.println("Relation: "+whiskey.relationName());
+        System.out.println("Instances: "+whiskey.numInstances());
+        System.out.println("classes: "+whiskey.numClasses()+"\n");
 
 
         chinaTest.randomize(new java.util.Random());	// randomize order of instances before splitting dataset
         Instances chinaTrainData = chinaTest.trainCV(20, 19);
         Instances chinaTestData = chinaTest.testCV(20, 19);
-        Classifier chinaClassifier = new CourseworkTree();
+        Classifier chinaClassifier = new TreeEnsemble();
         chinaClassifier.buildClassifier(chinaTrainData);
         Evaluation evalChina = new Evaluation(chinaTrainData);
         evalChina.evaluateModel(chinaClassifier, chinaTrainData);
         evalChina.evaluateModel(chinaClassifier, chinaTestData);
         System.out.println("1-NN accuracy for test data set china: \n"+ evalChina.pctCorrect()/100);
         System.out.println("china\n"+evalChina.toSummaryString());
+        System.out.println("Relation: "+chinaTest.relationName());
+        System.out.println("Instances: "+chinaTest.numInstances());
+        System.out.println("classes: "+chinaTest.numClasses()+"\n");
 
 
         faces_TEST.randomize(new java.util.Random());	// randomize order of instances before splitting dataset
         Instances faces_TRAINData = faces_TEST.trainCV(30, 29);
         Instances faces_TESTData = faces_TEST.testCV(30, 29);
-        Classifier facesClassifier = new CourseworkTree();
+        Classifier facesClassifier = new TreeEnsemble();
         facesClassifier.buildClassifier(faces_TRAINData);
         Evaluation evalFaces = new Evaluation(faces_TRAINData);
         evalFaces.evaluateModel(facesClassifier, faces_TRAINData);
         evalFaces.evaluateModel(facesClassifier, faces_TESTData);
         System.out.println("1-NN accuracy for test data set faces: \n"+ evalFaces.pctCorrect()/100);
         System.out.println("faces\n"+evalFaces.toSummaryString());
+        System.out.println("Relation: "+faces_TEST.relationName());
+        System.out.println("Instances: "+faces_TEST.numInstances());
+        System.out.println("classes: "+faces_TEST.numClasses()+"\n");
 
     }
 
@@ -202,8 +215,8 @@ public class Experiments {
     public static void main(String[] args) throws Exception {
         loadExperimentsData();
 //        runJ48Experiments();
-        runID3Experiments();
-//        runCWTReeExperiments();
+//        runID3Experiments();
+        runCWTReeExperiments();
 
 
 
