@@ -11,6 +11,9 @@ import weka.core.Instances;
 import java.io.IOException;
 import java.util.Arrays;
 
+
+// This experiments file is for initial experiments on the 4 main data sets
+
 public class Experiments {
 
     public static Instances opt;
@@ -124,30 +127,6 @@ public class Experiments {
         System.out.println("1-NN accuracy for test data set whiskey: \n"+ evalWhiskey.pctCorrect()/100);
         System.out.println("whiskey\n"+evalWhiskey.toSummaryString());
 
-
-//        chinaTest.randomize(new java.util.Random());	// randomize order of instances before splitting dataset
-//        Instances chinaTrainData = chinaTest.trainCV(20, 19);
-//        Instances chinaTestData = chinaTest.testCV(20, 19);
-//        Classifier chinaClassifier = new Id3();
-//        chinaClassifier.buildClassifier(chinaTrainData);
-//        Evaluation evalChina = new Evaluation(chinaTrainData);
-//        evalChina.evaluateModel(chinaClassifier, chinaTrainData);
-//        evalChina.evaluateModel(chinaClassifier, chinaTestData);
-//        System.out.println("1-NN accuracy for test data set china: \n"+ evalChina.pctCorrect()/100);
-//        System.out.println("china\n"+evalChina.toSummaryString());
-
-//
-//        faces_TEST.randomize(new java.util.Random());	// randomize order of instances before splitting dataset
-//        Instances faces_TRAINData = faces_TEST.trainCV(30, 29);
-//        Instances faces_TESTData = faces_TEST.testCV(30, 29);
-//        Classifier facesClassifier = new Id3();
-//        facesClassifier.buildClassifier(faces_TRAINData);
-//        Evaluation evalFaces = new Evaluation(faces_TRAINData);
-//        evalFaces.evaluateModel(facesClassifier, faces_TRAINData);
-//        evalFaces.evaluateModel(facesClassifier, faces_TESTData);
-//        System.out.println("1-NN accuracy for test data set faces: \n"+ evalFaces.pctCorrect()/100);
-//        System.out.println("faces\n"+evalFaces.toSummaryString());
-
     }
 
     public static void runCWTReeExperiments() throws Exception {
@@ -214,18 +193,9 @@ public class Experiments {
 
     public static void main(String[] args) throws Exception {
         loadExperimentsData();
-//        runJ48Experiments();
-//        runID3Experiments();
+        runJ48Experiments();
+        runID3Experiments();
         runCWTReeExperiments();
-
-
-
-
-
-
-        System.out.println();
-
-
 
     }
 

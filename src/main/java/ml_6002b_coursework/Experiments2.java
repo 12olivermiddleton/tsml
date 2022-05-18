@@ -1,27 +1,20 @@
 package ml_6002b_coursework;
 
 import experiments.data.DatasetLoading;
-import tsml.classifiers.shapelet_based.ShapeletTransformClassifier;
 import tsml.classifiers.shapelet_based.ShapeletTree;
-import tsml.transformers.ShapeletTransform;
 import weka.classifiers.Classifier;
 import weka.classifiers.evaluation.Evaluation;
-import weka.classifiers.meta.RandomCommittee;
 import weka.classifiers.trees.Id3;
 import weka.classifiers.trees.J48;
 import weka.classifiers.trees.RandomForest;
 import weka.core.Instances;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+// Main class for running experiments
 
 public class Experiments2 {
 
 
     public static String data = "C:/Users/omidd/OneDrive/Documents/University/Third Year/Machine Learning/tsml/tsml/src/main/java/ml_6002b_coursework/test_data/UCI Discrete/UCI Discrete/UCI Discrete";
-//    C:\Users\omidd\OneDrive\Documents\University\Third Year\Machine Learning\tsml\tsml\src\main\java\ml_6002b_coursework\test_data\UCI Discrete\UCI Discrete\UCI Discrete
-
 
     public static void testJ48Classifier() throws Exception {
         DatasetLists dataSets = new DatasetLists();
@@ -43,9 +36,9 @@ public class Experiments2 {
             Evaluation evalDataSet = new Evaluation(dataSetTrainData);
             evalDataSet.evaluateModel(optClassifier, dataSetTrainData);
             evalDataSet.evaluateModel(optClassifier, dataSetTestData);
-//            System.out.println(dataSet.relationName());
-//            System.out.println("1-NN accuracy for test data set: \n"+ evalDataSet.pctCorrect()/100);
-//            System.out.println("opt\n"+evalDataSet.toSummaryString());
+            System.out.println(dataSet.relationName());
+            System.out.println("1-NN accuracy for test data set: \n"+ evalDataSet.pctCorrect()/100);
+            System.out.println("opt\n"+evalDataSet.toSummaryString());
         }
 
 
@@ -178,11 +171,11 @@ public class Experiments2 {
 
     public static void main(String[] args) throws Exception {
         testJ48Classifier();
-//        testID3();
-//        testRandomForest();
+        testID3();
+        testRandomForest();
 //        testJ48Ensemble();
-//        testJ48TreeAttStats();
-//        testShapeletTransform();
+        testJ48TreeAttStats();
+        testShapeletTransform();
 
     }
 

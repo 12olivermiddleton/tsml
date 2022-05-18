@@ -22,9 +22,8 @@ public abstract class AttributeSplitMeasure {
             for (int i = 0; i < noOfSplits; i++) {
                 splitData[i] = new Instances(data, data.numInstances());
             }
-
+            // Split numeric data given split point is the mean
             int splitPoint = (int)data.meanOrMode(att);
-//            int subset;
 
             for (Instance inst: data) {
                 if(inst.value(att)<splitPoint){
@@ -37,22 +36,12 @@ public abstract class AttributeSplitMeasure {
             for (Instances split : splitData) {
                 split.compactify();
             }
-
+            // Returns a list containing 2 sets of instances
             return splitData;
 
         }else{
             throw new Exception("Unknown data type");
         }
-
-
-//        int[] count = new int[data.numClasses()];
-//        for(Instance ins:data){
-//            int c=(int)ins.classValue();
-//            count[c]++;
-//        }
-//        double[] classDistribution = new double[data.numClasses()];
-//        for(int i=0;i<data.numClasses();i++){
-//            classDistribution[i]=count[i]/(double)data.numInstances();
 
     }
 

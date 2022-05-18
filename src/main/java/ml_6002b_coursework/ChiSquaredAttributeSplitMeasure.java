@@ -5,8 +5,6 @@ import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
 
-import java.util.Arrays;
-
 
 public class ChiSquaredAttributeSplitMeasure extends AttributeSplitMeasure{
 
@@ -43,8 +41,6 @@ public class ChiSquaredAttributeSplitMeasure extends AttributeSplitMeasure{
                 att_cont_table[(int)ins.value(attribute_index)][(int)ins.classValue()]++;
             }
 
-//            System.out.println(Arrays.stream(att_cont_table).iterator());
-
 
             AttributeMeasures am = new AttributeMeasures();
 
@@ -55,9 +51,7 @@ public class ChiSquaredAttributeSplitMeasure extends AttributeSplitMeasure{
 
         }else{
             String name = att.name();
-//            System.out.println(name);
-//            System.out.println("not nominal"+ data.attribute(attribute_index).numValues());
-//            System.out.println("num classes"+data.numClasses());
+
             int[][] att_cont_table = new int[data.attribute(attribute_index).numValues()][data.numClasses()];
 
             for(Instance ins:data){

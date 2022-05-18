@@ -3,7 +3,7 @@ package ml_6002b_coursework;
 import java.text.DecimalFormat;
 
 /**
- *
+ * Attribute Measures
  *
  */
 public class AttributeMeasures {
@@ -41,8 +41,6 @@ public class AttributeMeasures {
             no_count += attribute[1][x];
         }
 
-//        double yes_count = attribute[0][0] + attribute[0][1];
-//        double no_count = attribute[1][0] + attribute[1][1];
         double total_count = yes_count + no_count;
 
         double prob_yes = yes_count / total_count;
@@ -102,8 +100,6 @@ public class AttributeMeasures {
 
     // Returns the gini measure for a given attributes contingency table
     public static double measureGini(int[][] attribute){
-//        double yes_count = attribute[0][0] + attribute[0][1];
-//        double no_count = attribute[1][0] + attribute[1][1];
 
         double yes_count = 0;
         for(int x = 0; x<attribute[0].length; x++){
@@ -120,7 +116,7 @@ public class AttributeMeasures {
 
         double gini_root_impurity = 1 - (((prob_yes)*(prob_yes))+((prob_no)*(prob_no)));
 
-
+        // Return the gini root impurity
         return gini_root_impurity;
     }
 

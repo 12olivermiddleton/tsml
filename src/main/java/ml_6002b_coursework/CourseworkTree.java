@@ -305,8 +305,6 @@ public class CourseworkTree extends AbstractClassifier {
         whiskey.randomize(new java.util.Random());	// randomize instance order before splitting dataset
         Instances trainData = whiskey.trainCV(9, 8);
         Instances testData = whiskey.testCV(7, 6);
-//        System.out.println(trainData.numInstances());
-//        System.out.println(testData.numInstances());
 
 
         CourseworkTree cwTree = new CourseworkTree();
@@ -320,36 +318,26 @@ public class CourseworkTree extends AbstractClassifier {
 
         GiniAttributeSplitMeasure gini = new GiniAttributeSplitMeasure();
 
-
         cwTree.setAttSplitMeasure(chi);
-//        cwTree.getCapabilities();
-
 
         cwTree.buildClassifier(opt);
         Evaluation eval_ig = new Evaluation(trainData);
         eval_ig.evaluateModel(cwTree, testData);
         System.out.println(eval_ig.toSummaryString("\nResults\n======\n", false));
 
-//        System.out.println(cwTree.root);
-//        System.out.println(cwTree.root.children[0]+"-:-"+cwTree.root.children[1]);
-//        System.out.println("-----------------------------");
-
-
-
+//
 //        // train classifier
-//        Classifier cls = new J48();
+//        Classifier cls = new CourseworkTree();
 //        cls.buildClassifier(train);
 //        // evaluate classifier and print some statistics
 //        Evaluation eval = new Evaluation(train);
 //        eval.evaluateModel(cls, test);
 //        System.out.println(eval.toSummaryString("\nResults\n======\n", false));
-//
+
 //        CourseworkTree cwTreeOptions = new CourseworkTree();
 //        cwTreeOptions.setOptions("igr");
 //        cwTreeOptions.buildClassifier(whiskey);
 //        System.out.println(cwTreeOptions.root+" -:- "+cwTreeOptions.root.children[0]);
-
-
 
 //
 //        IGAttributeSplitMeasure igOpt = new IGAttributeSplitMeasure();

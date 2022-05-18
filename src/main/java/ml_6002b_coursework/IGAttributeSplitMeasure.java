@@ -5,9 +5,6 @@ import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
 
-import java.io.File;
-import java.net.URL;
-
 
 public class IGAttributeSplitMeasure extends AttributeSplitMeasure{
 

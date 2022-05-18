@@ -2,10 +2,8 @@ package ml_6002b_coursework;
 
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
-import weka.classifiers.trees.J48;
 import weka.core.Instance;
 import weka.core.Instances;
-
 import java.util.ArrayList;
 import java.util.Random;
 
